@@ -1,0 +1,46 @@
+{
+  "project_info": {
+    "project_number": "951057498607",
+    "project_id": "host-manager-b6fc0",
+    "storage_bucket": "host-manager-b6fc0.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:951057498607:android:cfd06221669e9b8409b61a",
+        "android_client_info": {
+          "package_name": "com.example.host_manager"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "951057498607-jm7srl19r0ukl690fst4vq5pc1rcroi7.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBKekXB2hIDHvpSExiMsYNHC4CJaT0IoQA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "951057498607-jm7srl19r0ukl690fst4vq5pc1rcroi7.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "951057498607-u0h01mtkdb2c9d6j46k7rchc0g3eqh1p.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.hostManager"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
