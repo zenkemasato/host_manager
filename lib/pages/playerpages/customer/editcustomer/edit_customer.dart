@@ -1,18 +1,18 @@
 // ignore_for_file: avoid_unnecessary_containers, unused_local_variable,, unnecessary_const
 // avoid_types_as_parameter_names, non_constant_identifier_names
-import 'package:host_manager/pages/playerpages/customer/addcustomer/add_customer_model.dart';
 import 'package:host_manager/sidemanu/player_sidemanu.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'edit_customer_model.dart';
 
-class AddCustomer extends StatelessWidget {
-  const AddCustomer({Key? key}) : super(key: key);
+class EditCustomer extends StatelessWidget {
+  const EditCustomer({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return ChangeNotifierProvider<AddCustomerModel>(
-      create: (_) => AddCustomerModel(),
+    return ChangeNotifierProvider<EditCustomerModel>(
+      create: (_) => EditCustomerModel(),
       child: Scaffold(
         // アプリのヘッダー
         appBar: AppBar(
@@ -22,10 +22,11 @@ class AddCustomer extends StatelessWidget {
             child: SizedBox(
               height: 100,
               child: Text(
-                "顧客追加",
+                "顧客編集",
                 style: TextStyle(
                     fontSize: 30,
                     color: Colors.white,
+                    fontStyle: FontStyle.italic,
                     fontWeight: FontWeight.bold),
               ),
             ),
@@ -36,7 +37,7 @@ class AddCustomer extends StatelessWidget {
         body: SingleChildScrollView(
           scrollDirection: Axis.vertical,
           child: Container(child:
-              Consumer<AddCustomerModel>(builder: (context, model, child) {
+              Consumer<EditCustomerModel>(builder: (context, model, child) {
             return Padding(
               padding: const EdgeInsets.all(50),
               // 登録フォーム
@@ -142,7 +143,7 @@ class AddCustomer extends StatelessWidget {
                             ElevatedButton.styleFrom(primary: Colors.pink[200]),
                         onPressed: () async {
                           try {
-                            await model.addCustomerModel();
+                            await model.editCustomerModel();
                             Navigator.of(context).pop(true);
                           } catch (e) {
                             final snackBar = SnackBar(
@@ -153,7 +154,7 @@ class AddCustomer extends StatelessWidget {
                                 .showSnackBar(snackBar);
                           }
                         },
-                        child: const Text('リスト追加',
+                        child: const Text('リスト更新',
                             style: TextStyle(color: Colors.white)),
                       ),
                     ],

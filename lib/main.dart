@@ -1,6 +1,7 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:host_manager/pages/playerpages/customer/player_customer.dart';
+import 'package:host_manager/pages/routing.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -13,9 +14,11 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const MaterialApp(
-      title: 'Host Manager',
-      home: PlayerCustomer(),
+    return MaterialApp(
+      home: const PlayerCustomer(),
+      routes: <String, WidgetBuilder>{
+        Routes.playercustomer: (BuildContext context) => const PlayerCustomer(),
+      },
     );
   }
 }
