@@ -1,3 +1,5 @@
+// ignore_for_file: sized_box_for_whitespace
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:host_manager/pages/routing.dart';

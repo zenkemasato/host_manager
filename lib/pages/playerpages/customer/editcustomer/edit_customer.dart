@@ -1,7 +1,6 @@
 // ignore_for_file: avoid_unnecessary_containers, unused_local_variable,, unnecessary_const, use_key_in_widget_constructors, prefer_const_constructors_in_immutables
 // avoid_types_as_parameter_names, non_constant_identifier_names
 import 'package:host_manager/domein/costomer.dart';
-import 'package:host_manager/sidemanu/player_sidemanu.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -35,7 +34,6 @@ class EditCustomer extends StatelessWidget {
             ),
           ),
         ),
-        drawer: const PlayerSideMenu(),
         // メイン画面
         body: SingleChildScrollView(
           scrollDirection: Axis.vertical,

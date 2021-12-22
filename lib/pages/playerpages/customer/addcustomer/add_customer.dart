@@ -1,4 +1,4 @@
-// ignore_for_file: avoid_unnecessary_containers, unused_local_variable,, unnecessary_const
+// ignore_for_file: avoid_unnecessary_containers, unused_local_variable,, unnecessary_const, unused_import
 // avoid_types_as_parameter_names, non_constant_identifier_names
 import 'package:host_manager/pages/playerpages/customer/addcustomer/add_customer_model.dart';
 import 'package:host_manager/sidemanu/player_sidemanu.dart';
@@ -31,7 +31,7 @@ class AddCustomer extends StatelessWidget {
             ),
           ),
         ),
-        drawer: const PlayerSideMenu(),
+
         // メイン画面
         body: SingleChildScrollView(
           scrollDirection: Axis.vertical,

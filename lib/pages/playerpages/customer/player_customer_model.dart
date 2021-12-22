@@ -30,4 +30,11 @@ class PlayerCustomerModel extends ChangeNotifier {
     this.Customers = Customers;
     notifyListeners();
   }
+
+  Future deleteCustomer(Customer customer) {
+    return FirebaseFirestore.instance
+        .collection('users')
+        .doc(customer.id)
+        .delete();
+  }
 }

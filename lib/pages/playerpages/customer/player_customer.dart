@@ -1,4 +1,5 @@
-// ignore_for_file: avoid_unnecessary_containers, unused_local_variable, avoid_types_as_parameter_names, non_constant_identifier_names
+// ignore_for_file: non_constant_identifier_names, avoid_types_as_parameter_names,
+import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:host_manager/domein/costomer.dart';
 import 'package:host_manager/pages/playerpages/customer/addcustomer/add_customer.dart';
 import 'package:host_manager/pages/playerpages/customer/editcustomer/edit_customer.dart';
@@ -52,78 +53,89 @@ class _PlayerCustomerState extends State<PlayerCustomer> {
 
               final List<Widget> widgets = Customers.map((Customer) =>
                   // スライダーメニュー
-
-                  // 顧客データ
-                  Container(
-                    margin: const EdgeInsets.all(20),
-                    child: ListTile(
-                      // 詳細切り替えボタン
-                      title: Text(Customer.name + "様"),
-                      subtitle: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text(Customer.age + "歳"),
-                          Text("誕生日 : " + Customer.birthday),
-                          Text("趣味 : " + Customer.hobby),
-                          Text(Customer.count + "回来店"),
-                          Text("電話番号 : " + Customer.number),
-                          Text("NGワード : " + Customer.ngword),
-                        ],
-                      ),
-                      trailing: Column(children: [
-                        //editボタン
-                        GestureDetector(
-                          onTap: () async {
-                            // 画面遷移
-                            final String? name = await Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                builder: (context) => EditCustomer(Customer),
-                              ),
-                            );
-
-                            if (name != null) {
-                              final snackBar = SnackBar(
-                                backgroundColor: const Color(0xFFF48FB1),
-                                content: Text(
-                                  '$name様を更新しました',
-                                  style: const TextStyle(
-                                      color: Colors.white,
-                                      fontSize: 20,
-                                      fontWeight: FontWeight.bold),
+                  Slidable(
+                    endActionPane: ActionPane(
+                      motion: const DrawerMotion(),
+                      children: [
+                        SlidableAction(
+                          backgroundColor: Colors.red,
+                          foregroundColor: Colors.white,
+                          icon: Icons.delete,
+                          label: '削除',
+                          onPressed: (context) =>
+                              coutionDialog(context, Customer, model),
+                        ),
+                      ],
+                    ),
+                    // 顧客データ
+                    child: Container(
+                      margin: const EdgeInsets.all(20),
+                      child: ListTile(
+                        title: Text(Customer.name + "様"),
+                        subtitle: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(Customer.age + "歳"),
+                            Text("誕生日 : " + Customer.birthday),
+                            Text("趣味 : " + Customer.hobby),
+                            Text(Customer.count + "回来店"),
+                            Text("電話番号 : " + Customer.number),
+                            Text("NGワード : " + Customer.ngword),
+                          ],
+                        ),
+                        trailing: Column(children: [
+                          // shareボタン
+                          Container(
+                            padding: const EdgeInsets.all(2),
+                            decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(50),
+                                color: Colors.green),
+                            child: const Icon(
+                              Icons.share,
+                              color: Colors.white,
+                            ),
+                          ),
+                          //editボタン
+                          GestureDetector(
+                            onTap: () async {
+                              // 画面遷移
+                              final String? name = await Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) => EditCustomer(Customer),
                                 ),
                               );
-                              ScaffoldMessenger.of(context)
-                                  .showSnackBar(snackBar);
-                            }
-                            model.fechCustomerList();
-                          },
-                          child: Container(
-                            padding: const EdgeInsets.all(2),
-                            decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(50),
-                                color: Colors.blue),
-                            child: const Icon(
-                              Icons.edit,
-                              color: Colors.white,
+
+                              if (name != null) {
+                                final snackBar = SnackBar(
+                                  backgroundColor: const Color(0xFFF48FB1),
+                                  content: Text(
+                                    '$name様を更新しました',
+                                    style: const TextStyle(
+                                        color: Colors.white,
+                                        fontSize: 20,
+                                        fontWeight: FontWeight.bold),
+                                  ),
+                                );
+                                ScaffoldMessenger.of(context)
+                                    .showSnackBar(snackBar);
+                              }
+                              model.fechCustomerList();
+                            },
+                            child: Container(
+                              padding: const EdgeInsets.all(2),
+                              decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(50),
+                                  color: Colors.blue),
+                              child: const Icon(
+                                Icons.edit,
+                                color: Colors.white,
+                              ),
                             ),
                           ),
-                        ),
-                        // deleteボタン
-                        GestureDetector(
-                          onTap: () {},
-                          child: Container(
-                            padding: const EdgeInsets.all(2),
-                            decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(50),
-                                color: Colors.red),
-                            child: const Icon(
-                              Icons.delete,
-                              color: Colors.white,
-                            ),
-                          ),
-                        ),
-                      ]),
+                          // deleteボタン
+                        ]),
+                      ),
                     ),
                   )).toList();
               return ListView(
@@ -165,5 +177,48 @@ class _PlayerCustomerState extends State<PlayerCustomer> {
                 backgroundColor: Colors.pink[200],
               );
             })));
+  }
+
+  // 削除するためのダイアログ
+  void coutionDialog(
+    BuildContext context,
+    Customer customer,
+    PlayerCustomerModel model,
+  ) {
+    showDialog(
+        context: context,
+        barrierDismissible: false,
+        builder: (_) => CupertinoAlertDialog(
+                title: const Text(
+                  "Coution",
+                  style: TextStyle(fontSize: 30, color: Colors.red),
+                ),
+                content: Text("${customer.name}様を削除しますか？"),
+                actions: [
+                  CupertinoDialogAction(
+                      child: const Text('いいえ'),
+                      isDestructiveAction: true,
+                      onPressed: () {
+                        Navigator.of(context).pop();
+                      }),
+                  CupertinoDialogAction(
+                      child: const Text('はい'),
+                      onPressed: () async {
+                        await model.deleteCustomer(customer);
+                        Navigator.pop(context);
+                        final snackBar = SnackBar(
+                          backgroundColor: Colors.red,
+                          content: Text(
+                            '${customer.name}様を削除しました',
+                            style: const TextStyle(
+                                color: Colors.white,
+                                fontSize: 20,
+                                fontWeight: FontWeight.bold),
+                          ),
+                        );
+                        model.fechCustomerList();
+                        ScaffoldMessenger.of(context).showSnackBar(snackBar);
+                      })
+                ]));
   }
 }
