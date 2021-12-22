@@ -1,5 +1,6 @@
-// ignore_for_file: avoid_unnecessary_containers, unused_local_variable,, unnecessary_const
+// ignore_for_file: avoid_unnecessary_containers, unused_local_variable,, unnecessary_const, use_key_in_widget_constructors, prefer_const_constructors_in_immutables
 // avoid_types_as_parameter_names, non_constant_identifier_names
+import 'package:host_manager/domein/costomer.dart';
 import 'package:host_manager/sidemanu/player_sidemanu.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter/cupertino.dart';
@@ -7,12 +8,14 @@ import 'package:flutter/material.dart';
 import 'edit_customer_model.dart';
 
 class EditCustomer extends StatelessWidget {
-  const EditCustomer({Key? key}) : super(key: key);
+  // Customerの値を先に入れておく
+  final Customer customer;
+  EditCustomer(this.customer);
 
   @override
   Widget build(BuildContext context) {
     return ChangeNotifierProvider<EditCustomerModel>(
-      create: (_) => EditCustomerModel(),
+      create: (_) => EditCustomerModel(customer),
       child: Scaffold(
         // アプリのヘッダー
         appBar: AppBar(
@@ -40,84 +43,91 @@ class EditCustomer extends StatelessWidget {
               Consumer<EditCustomerModel>(builder: (context, model, child) {
             return Padding(
               padding: const EdgeInsets.all(50),
-              // 登録フォーム
+              // 更新フォーム
               child: Column(
                 children: [
-                  // 名前フォーム
+                  // 名前更新フォーム
                   TextFormField(
+                      controller: model.namecontroller,
                       decoration: const InputDecoration(
                         border: OutlineInputBorder(),
                         labelText: '名前',
                         icon: Icon(Icons.person_sharp),
                       ),
                       onChanged: (text) {
-                        model.name = text;
+                        model.setName(text);
                       }),
                   const SizedBox(height: 20),
-                  // 年齢フォーム
+                  // 年齢t更新フォーム
                   TextFormField(
+                      controller: model.agecontroller,
                       decoration: const InputDecoration(
                         border: OutlineInputBorder(),
                         labelText: '年齢',
                         icon: Icon(Icons.auto_graph),
                       ),
                       onChanged: (text) {
-                        model.age = text;
+                        model.setAge(text);
                       }),
                   const SizedBox(height: 20),
-                  // 誕生日フォーム
+                  // 誕生日更新フォーム
                   TextFormField(
+                      controller: model.birthdaycontroller,
                       decoration: const InputDecoration(
                         border: OutlineInputBorder(),
                         labelText: '誕生日',
                         icon: Icon(Icons.cake_outlined),
                       ),
                       onChanged: (text) {
-                        model.birthday = text;
+                        model.setBirthDay(text);
                       }),
                   const SizedBox(height: 20),
-                  // 趣味フォーム
+                  // 趣味更新フォーム
                   TextFormField(
+                      controller: model.hobbycontroller,
                       decoration: const InputDecoration(
                         border: OutlineInputBorder(),
                         labelText: '趣味',
                         icon: Icon(Icons.free_breakfast),
                       ),
                       onChanged: (text) {
-                        model.hobby = text;
+                        model.setHobby(text);
                       }),
                   const SizedBox(height: 20),
-                  // 来店回数フォーム
+                  // 来店回数更新フォーム
                   TextFormField(
+                      controller: model.countcontroller,
                       decoration: const InputDecoration(
                         border: OutlineInputBorder(),
                         labelText: '来店回数',
                         icon: Icon(Icons.repeat_rounded),
                       ),
                       onChanged: (text) {
-                        model.count = text;
+                        model.setCount(text);
                       }),
                   const SizedBox(height: 20),
-                  // 電話番号フォーム
+                  // 電話番号更新フォーム
                   TextFormField(
+                      controller: model.numbercontroller,
                       decoration: const InputDecoration(
                         border: OutlineInputBorder(),
                         labelText: '電話番号',
                         icon: Icon(Icons.call_rounded),
                       ),
                       onChanged: (text) {
-                        model.number = text;
+                        model.setNumber(text);
                       }),
                   const SizedBox(height: 30),
-                  // NGワードフォーム
+                  // NGワード更新フォーム
                   TextFormField(
+                      controller: model.ngwordcontroller,
                       decoration: const InputDecoration(
                         border: OutlineInputBorder(),
                         labelText: 'NGワード',
                         icon: Icon(Icons.cancel_outlined),
                       ),
                       onChanged: (text) {
-                        model.ngword = text;
+                        model.setNgword(text);
                       }),
                   const SizedBox(height: 30),
                   Row(
@@ -141,20 +151,22 @@ class EditCustomer extends StatelessWidget {
                       ElevatedButton(
                         style:
                             ElevatedButton.styleFrom(primary: Colors.pink[200]),
-                        onPressed: () async {
-                          try {
-                            await model.editCustomerModel();
-                            Navigator.of(context).pop(true);
-                          } catch (e) {
-                            final snackBar = SnackBar(
-                              backgroundColor: Colors.red,
-                              content: Text(e.toString()),
-                            );
-                            ScaffoldMessenger.of(context)
-                                .showSnackBar(snackBar);
-                          }
-                        },
-                        child: const Text('リスト更新',
+                        onPressed: model.isUpdated()
+                            ? () async {
+                                try {
+                                  await model.editCustomerModel();
+                                  Navigator.of(context).pop(model.name);
+                                } catch (e) {
+                                  final snackBar = SnackBar(
+                                    backgroundColor: Colors.red,
+                                    content: Text(e.toString()),
+                                  );
+                                  ScaffoldMessenger.of(context)
+                                      .showSnackBar(snackBar);
+                                }
+                              }
+                            : null,
+                        child: const Text('更新する',
                             style: TextStyle(color: Colors.white)),
                       ),
                     ],

@@ -15,6 +15,7 @@ class PlayerCustomerModel extends ChangeNotifier {
     final List<Customer> Customers =
         snapshot.docs.map((DocumentSnapshot document) {
       Map<String, dynamic> data = document.data() as Map<String, dynamic>;
+      final String id = document.id;
       final String name = data["name"];
       final String age = data["age"];
       final String birthday = data["birthday"];
@@ -23,7 +24,7 @@ class PlayerCustomerModel extends ChangeNotifier {
       final String number = data["number"];
       final String ngword = data["ngword"];
       // 取得した値をCustomerモデルに代入
-      return Customer(name, age, birthday, hobby, count, number, ngword);
+      return Customer(id, name, age, birthday, hobby, count, number, ngword);
     }).toList();
     // それぞれの値を初期化されたCustomerに代入
     this.Customers = Customers;

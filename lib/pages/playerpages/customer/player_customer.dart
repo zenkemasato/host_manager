@@ -1,5 +1,4 @@
 // ignore_for_file: avoid_unnecessary_containers, unused_local_variable, avoid_types_as_parameter_names, non_constant_identifier_names
-import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:host_manager/domein/costomer.dart';
 import 'package:host_manager/pages/playerpages/customer/addcustomer/add_customer.dart';
 import 'package:host_manager/pages/playerpages/customer/editcustomer/edit_customer.dart';
@@ -19,8 +18,6 @@ class PlayerCustomer extends StatefulWidget {
 }
 
 class _PlayerCustomerState extends State<PlayerCustomer> {
-  bool isShow = false;
-
   @override
   Widget build(BuildContext context) {
     return ChangeNotifierProvider<PlayerCustomerModel>(
@@ -53,52 +50,87 @@ class _PlayerCustomerState extends State<PlayerCustomer> {
                 return const Center(child: CircularProgressIndicator());
               }
 
-              final List<Widget> widgets = Customers.map(
-                (Customer) =>
-                    // スライダーメニュー
-                    Slidable(
-                        // 顧客データ
-                        child: Container(
-                          margin: const EdgeInsets.all(20),
-                          child: ListTile(
-                            // 詳細切り替えボタン
-                            title: Text(Customer.name + "様"),
-                            subtitle: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Text(Customer.age + "歳"),
-                                Text("誕生日 : " + Customer.birthday),
-                                Text("趣味 : " + Customer.hobby),
-                                Text(Customer.count + "回来店"),
-                                Text("電話番号 : " + Customer.number),
-                                Text("NGワード : " + Customer.ngword),
-                              ],
+              final List<Widget> widgets = Customers.map((Customer) =>
+                  // スライダーメニュー
+
+                  // 顧客データ
+                  Container(
+                    margin: const EdgeInsets.all(20),
+                    child: ListTile(
+                      // 詳細切り替えボタン
+                      title: Text(Customer.name + "様"),
+                      subtitle: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(Customer.age + "歳"),
+                          Text("誕生日 : " + Customer.birthday),
+                          Text("趣味 : " + Customer.hobby),
+                          Text(Customer.count + "回来店"),
+                          Text("電話番号 : " + Customer.number),
+                          Text("NGワード : " + Customer.ngword),
+                        ],
+                      ),
+                      trailing: Column(children: [
+                        //editボタン
+                        GestureDetector(
+                          onTap: () async {
+                            // 画面遷移
+                            final String? name = await Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => EditCustomer(Customer),
+                              ),
+                            );
+
+                            if (name != null) {
+                              final snackBar = SnackBar(
+                                backgroundColor: const Color(0xFFF48FB1),
+                                content: Text(
+                                  '$name様を更新しました',
+                                  style: const TextStyle(
+                                      color: Colors.white,
+                                      fontSize: 20,
+                                      fontWeight: FontWeight.bold),
+                                ),
+                              );
+                              ScaffoldMessenger.of(context)
+                                  .showSnackBar(snackBar);
+                            }
+                            model.fechCustomerList();
+                          },
+                          child: Container(
+                            padding: const EdgeInsets.all(2),
+                            decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(50),
+                                color: Colors.blue),
+                            child: const Icon(
+                              Icons.edit,
+                              color: Colors.white,
                             ),
                           ),
                         ),
-                        // スライダーメニュー
-                        endActionPane: const ActionPane(
-                          key: ValueKey(0),
-                          motion: DrawerMotion(),
-                          children: <Widget>[
-                            SlidableAction(
-                                label: '編集',
-                                backgroundColor: Colors.blue,
-                                icon: Icons.edit,
-                                onPressed: null),
-                            SlidableAction(
-                              label: '削除',
-                              backgroundColor: Colors.red,
-                              icon: Icons.delete,
-                              onPressed: null,
+                        // deleteボタン
+                        GestureDetector(
+                          onTap: () {},
+                          child: Container(
+                            padding: const EdgeInsets.all(2),
+                            decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(50),
+                                color: Colors.red),
+                            child: const Icon(
+                              Icons.delete,
+                              color: Colors.white,
                             ),
-                          ],
-                        )),
-              ).toList();
+                          ),
+                        ),
+                      ]),
+                    ),
+                  )).toList();
               return ListView(
                 children: widgets,
               );
             }),
+
             // 追加ボタン
             floatingActionButton:
                 Consumer<PlayerCustomerModel>(builder: (context, model, child) {

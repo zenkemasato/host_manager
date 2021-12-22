@@ -1,5 +1,6 @@
 class Customer {
   Customer(
+    this.id,
     this.name,
     this.age,
     this.birthday,
@@ -8,6 +9,7 @@ class Customer {
     this.number,
     this.ngword,
   );
+  String id;
   String name;
   String age;
   String birthday;
