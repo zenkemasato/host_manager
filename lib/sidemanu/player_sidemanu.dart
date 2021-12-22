@@ -22,7 +22,11 @@ class PlayerSideMenu extends StatelessWidget {
                   children: [
                     // ユーザーページ
                     GestureDetector(
-                      onTap: () {},
+                      onTap: () {
+                        Navigator.of(context).pop();
+                        Navigator.of(context)
+                            .pushReplacementNamed(Routes.playeruser);
+                      },
                       child: Container(
                         margin: const EdgeInsets.only(right: 20),
                         height: 50,
@@ -43,14 +47,41 @@ class PlayerSideMenu extends StatelessWidget {
                 ),
               ),
             ),
-            // メール管理
+            // 顧客管理
             ListTile(
               title: const Text("顧客管理"),
-              leading: const Icon(Icons.person),
+              leading: const Icon(Icons.person_search),
               onTap: () {
                 Navigator.of(context).pop();
                 Navigator.of(context)
                     .pushReplacementNamed(Routes.playercustomer);
+              },
+            ),
+            // 出勤管理
+            ListTile(
+              title: const Text("出勤管理"),
+              leading: const Icon(Icons.note_alt_outlined),
+              onTap: () {
+                Navigator.of(context).pop();
+                Navigator.of(context).pushReplacementNamed(Routes.playeradverd);
+              },
+            ),
+            // NGワード管理
+            ListTile(
+              title: const Text("NGワード"),
+              leading: const Icon(Icons.cancel_outlined),
+              onTap: () {
+                Navigator.of(context).pop();
+                Navigator.of(context).pushReplacementNamed(Routes.playerngword);
+              },
+            ),
+            // オーダー
+            ListTile(
+              title: const Text("オーダー"),
+              leading: const Icon(Icons.notifications_on_rounded),
+              onTap: () {
+                Navigator.of(context).pop();
+                Navigator.of(context).pushReplacementNamed(Routes.playerorder);
               },
             ),
           ],
