@@ -1,22 +1,23 @@
-// ignore_for_file: use_key_in_widget_constructors, avoid_unnecessary_containers
-import 'package:host_manager/pages/playerpages/palyer_sign_up_model.dart';
-import 'package:host_manager/pages/routing.dart';
-import 'package:provider/provider.dart';
+// ignore_for_file: use_key_in_widget_constructors
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import '../routing.dart';
+import 'admin_sign_up_model.dart';
 
-class PlayerSignUp extends StatelessWidget {
-  static const String routesName = "/playersignup";
+class AdminSignUp extends StatelessWidget {
+  static const String routesName = "/adminsignup";
 
   @override
   Widget build(BuildContext context) {
-    return ChangeNotifierProvider<PlayerSignUpModel>(
-      create: (_) => PlayerSignUpModel(),
+    return ChangeNotifierProvider<AdminSignUpModel>(
+      create: (_) => AdminSignUpModel(),
       child: Scaffold(
-        // アプリのヘッダー
+        // アドミンヘッダー
         appBar: AppBar(
           centerTitle: true,
-          backgroundColor: Colors.pink[200],
+          backgroundColor: Colors.black,
           title: const SafeArea(
             child: SizedBox(
               height: 100,
@@ -24,8 +25,7 @@ class PlayerSignUp extends StatelessWidget {
                 "新規登録",
                 style: TextStyle(
                     fontSize: 30,
-                    color: Colors.white,
-                    fontStyle: FontStyle.italic,
+                    color: Colors.red,
                     fontWeight: FontWeight.bold),
               ),
             ),
@@ -37,7 +37,7 @@ class PlayerSignUp extends StatelessWidget {
           child: Stack(
             children: [
               Container(child:
-                  Consumer<PlayerSignUpModel>(builder: (context, model, child) {
+                  Consumer<AdminSignUpModel>(builder: (context, model, child) {
                 return Padding(
                   padding: const EdgeInsets.all(50),
                   // 更新フォーム
@@ -73,10 +73,10 @@ class PlayerSignUp extends StatelessWidget {
                         onPressed: () async {
                           model.startLoading();
                           try {
-                            await model.playerSignUpModel();
+                            await model.adminSignUpModel();
 
                             Navigator.of(context)
-                                .pushReplacementNamed(Routes.playercustomer);
+                                .pushReplacementNamed(Routes.admincustomer);
                           } catch (e) {
                             final snackBar = SnackBar(
                               backgroundColor: Colors.red,

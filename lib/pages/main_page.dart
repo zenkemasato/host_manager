@@ -2,8 +2,7 @@
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:host_manager/pages/playerpages/player_sign_in.dart';
-import 'package:host_manager/pages/playerpages/player_sign_up.dart';
+import 'package:host_manager/pages/routing.dart';
 import 'package:host_manager/widgets/app_large_text.dart';
 import 'package:host_manager/widgets/app_text.dart';
 
@@ -22,7 +21,7 @@ class _MainPageState extends State<MainPage> {
     "host3.jpeg",
   ];
   // それぞれにそれぞれのログイン、サインインができるroutingを載せる
-  List sub = ["Playerの方", "Boyの方", "Adminの方"];
+  List sub = ["Player", "Boy", "Admin"];
 
   @override
   Widget build(BuildContext context) {
@@ -65,10 +64,18 @@ class _MainPageState extends State<MainPage> {
                           const SizedBox(height: 10),
                           ElevatedButton(
                             onPressed: () {
-                              Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                      builder: (context) => PlayerSignIn()));
+                              if (index == 0) {
+                                Navigator.of(context)
+                                    .pushReplacementNamed(Routes.playersignin);
+                              }
+                              if (index == 1) {
+                                Navigator.of(context)
+                                    .pushReplacementNamed(Routes.boysignin);
+                              }
+                              if (index == 2) {
+                                Navigator.of(context)
+                                    .pushReplacementNamed(Routes.adminsignin);
+                              }
                             },
                             child: AppText(
                               text: "ログイン",
@@ -85,10 +92,18 @@ class _MainPageState extends State<MainPage> {
                           const SizedBox(height: 10),
                           ElevatedButton(
                             onPressed: () {
-                              Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                      builder: (context) => PlayerSignUp()));
+                              if (index == 0) {
+                                Navigator.of(context)
+                                    .pushReplacementNamed(Routes.playersignup);
+                              }
+                              if (index == 1) {
+                                Navigator.of(context)
+                                    .pushReplacementNamed(Routes.boysignup);
+                              }
+                              if (index == 2) {
+                                Navigator.of(context)
+                                    .pushReplacementNamed(Routes.adminsignup);
+                              }
                             },
                             child: AppText(
                               text: "新規登録",

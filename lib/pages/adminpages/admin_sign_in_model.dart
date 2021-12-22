@@ -1,7 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
-class BoySignInModel extends ChangeNotifier {
+class AdminSignInModel extends ChangeNotifier {
   final emailController = TextEditingController();
   final passwordController = TextEditingController();
 
@@ -30,7 +30,7 @@ class BoySignInModel extends ChangeNotifier {
     notifyListeners();
   }
 
-  Future boySignInModel() async {
+  Future adminSignInModel() async {
     this.email = emailController.text;
     this.password = passwordController.text;
 

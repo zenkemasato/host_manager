@@ -1,7 +1,8 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:flutter/material.dart';
+import 'package:flutter/cupertino.dart';
 
-class BoySignInModel extends ChangeNotifier {
+class BoySignUpModel extends ChangeNotifier {
   final emailController = TextEditingController();
   final passwordController = TextEditingController();
 
@@ -30,17 +31,26 @@ class BoySignInModel extends ChangeNotifier {
     notifyListeners();
   }
 
-  Future boySignInModel() async {
+  Future boySignUpModel() async {
     this.email = emailController.text;
     this.password = passwordController.text;
 
+    // fire-authの認証の追加
     if (email != null && password != null) {
-      // ログイン
-      await FirebaseAuth.instance
-          .signInWithEmailAndPassword(email: email!, password: password!);
+      final userCredential = await FirebaseAuth.instance
+          .createUserWithEmailAndPassword(email: email!, password: password!);
+      final user = userCredential.user;
+      if (user != null) {
+        final uid = user.uid;
+        // firestoreに追加
 
-      final currentUser = FirebaseAuth.instance.currentUser;
-      final uid = currentUser!.uid;
+        final doc = FirebaseFirestore.instance.collection('boys').doc(uid);
+
+        await doc.set({
+          "uid": uid,
+          "email": email,
+        });
+      }
     }
   }
 }
