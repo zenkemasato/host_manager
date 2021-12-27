@@ -85,14 +85,32 @@ class _PlayerCustomerState extends State<PlayerCustomer> {
                         ),
                         trailing: Column(children: [
                           // shareボタン
-                          Container(
-                            padding: const EdgeInsets.all(2),
-                            decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(50),
-                                color: Colors.green),
-                            child: const Icon(
-                              Icons.share,
-                              color: Colors.white,
+                          GestureDetector(
+                            onTap: () {
+                              // shareしたものをNGワードモデルに格納
+                              model.shareCustomerModel(Customer);
+                              var snackBar = const SnackBar(
+                                backgroundColor: Colors.red,
+                                content: Text(
+                                  'NGワードに追加しました',
+                                  style: TextStyle(
+                                      color: Colors.white,
+                                      fontSize: 20,
+                                      fontWeight: FontWeight.bold),
+                                ),
+                              );
+                              ScaffoldMessenger.of(context)
+                                  .showSnackBar(snackBar);
+                            },
+                            child: Container(
+                              padding: const EdgeInsets.all(2),
+                              decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(50),
+                                  color: Colors.green),
+                              child: const Icon(
+                                Icons.share,
+                                color: Colors.white,
+                              ),
                             ),
                           ),
                           //editボタン

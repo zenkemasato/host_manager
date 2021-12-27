@@ -4,6 +4,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:host_manager/domein/costomer.dart';
+import 'package:host_manager/domein/ngword.dart';
 
 class PlayerCustomerModel extends ChangeNotifier {
   List<Customer>? Customers;
@@ -45,5 +46,16 @@ class PlayerCustomerModel extends ChangeNotifier {
         .collection("customers")
         .doc(customer.id)
         .delete();
+  }
+
+  Future shareCustomerModel(Customer customer) async {
+    final String name = customer.name;
+    final String ngword = customer.ngword;
+    // firestoreに追加
+    await FirebaseFirestore.instance.collection("ngwords").add({
+      "name": name,
+      "ngword": ngword,
+    });
+    notifyListeners();
   }
 }

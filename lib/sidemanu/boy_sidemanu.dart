@@ -62,7 +62,7 @@ class BoySideMenu extends StatelessWidget {
               leading: const Icon(Icons.cancel_outlined),
               onTap: () {
                 Navigator.of(context).pop();
-                Navigator.of(context).pushReplacementNamed(Routes.ngwordpage);
+                Navigator.of(context).pushReplacementNamed(Routes.boyngword);
               },
             ),
             // オーダー

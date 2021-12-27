@@ -1,6 +1,7 @@
 // ignore_for_file: equal_keys_in_map
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:host_manager/pages/adminpages/ngword/admin_ngword.dart';
 import 'package:host_manager/pages/adverd/adverd_page.dart';
 import 'package:host_manager/pages/adminpages/admin_sign_up.dart';
 import 'package:host_manager/pages/adminpages/customer/admin_customer.dart';
@@ -10,9 +11,10 @@ import 'package:host_manager/pages/adminpages/salary/admin_salary.dart';
 import 'package:host_manager/pages/adminpages/sales/admin_sales.dart';
 import 'package:host_manager/pages/adminpages/staff/admin_staff.dart';
 import 'package:host_manager/pages/boypages/boy_sign_up.dart';
+import 'package:host_manager/pages/boypages/ngword/boy_ngword.dart';
 import 'package:host_manager/pages/main_page.dart';
-import 'package:host_manager/pages/ngword/ngword_page.dart';
 import 'package:host_manager/pages/playerpages/customer/player_customer.dart';
+import 'package:host_manager/pages/playerpages/ngword/player_ngword.dart';
 import 'package:host_manager/pages/playerpages/oder/player_oder.dart';
 import 'package:host_manager/pages/playerpages/player_sign_in.dart';
 import 'package:host_manager/pages/playerpages/player_sign_up.dart';
@@ -41,7 +43,6 @@ class MyApp extends StatelessWidget {
         // ホーム Routes
         Routes.home: (BuildContext context) => const MainPage(),
         // 全画面共通
-        Routes.ngwordpage: (BuildContext context) => const NgwordPage(),
         Routes.adverdpage: (BuildContext context) => const AdverdPage(),
         // Player Routes
         Routes.playercustomer: (BuildContext context) => const PlayerCustomer(),
@@ -49,11 +50,13 @@ class MyApp extends StatelessWidget {
         Routes.playerorder: (BuildContext context) => const PlayerOrder(),
         Routes.playersignin: (BuildContext context) => PlayerSignIn(),
         Routes.playersignup: (BuildContext context) => PlayerSignUp(),
+        Routes.playerngword: (BuildContext context) => const PlayerNgword(),
         // Boy Routes
         Routes.boyuser: (BuildContext context) => const BoyUser(),
         Routes.boyorder: (BuildContext context) => const BoyOrder(),
         Routes.boysignin: (BuildContext context) => BoySignIn(),
         Routes.boysignup: (BuildContext context) => BoySignUp(),
+        Routes.boyngword: (BuildContext context) => const BoyNgword(),
         // Admin Routes
         Routes.adminuser: (BuildContext context) => const AdminUser(),
         Routes.adminstuff: (BuildContext context) => const AdminStuff(),
@@ -64,6 +67,7 @@ class MyApp extends StatelessWidget {
         Routes.admincustomer: (BuildContext context) => const AdminCusromer(),
         Routes.adminsignin: (BuildContext context) => AdminSignIn(),
         Routes.adminsignup: (BuildContext context) => AdminSignUp(),
+        Routes.adminngword: (BuildContext context) => const AdminNgword(),
       },
     );
   }
