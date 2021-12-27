@@ -56,7 +56,7 @@ class EditCustomer extends StatelessWidget {
                         model.setName(text);
                       }),
                   const SizedBox(height: 20),
-                  // 年齢t更新フォーム
+                  // 年齢更新フォーム
                   TextFormField(
                       controller: model.agecontroller,
                       decoration: const InputDecoration(

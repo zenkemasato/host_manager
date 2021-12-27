@@ -1,16 +1,23 @@
 // ignore_for_file: unused_field, non_constant_identifier_names, unused_local_variable
 
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:host_manager/domein/costomer.dart';
 
 class PlayerCustomerModel extends ChangeNotifier {
   List<Customer>? Customers;
 
+  // firebaseAuthからそれぞれのデータをとる
+  final player = FirebaseAuth.instance.currentUser;
+
   // firebaseから値を読み取り、snapshotに格納
   void fechCustomerList() async {
-    final QuerySnapshot snapshot =
-        await FirebaseFirestore.instance.collection('users').get();
+    final QuerySnapshot snapshot = await FirebaseFirestore.instance
+        .collection('players')
+        .doc(player!.uid)
+        .collection('customers')
+        .get();
     // snapshot型のデータをMap型に変え、Customersに代入
     final List<Customer> Customers =
         snapshot.docs.map((DocumentSnapshot document) {
@@ -33,7 +40,9 @@ class PlayerCustomerModel extends ChangeNotifier {
 
   Future deleteCustomer(Customer customer) {
     return FirebaseFirestore.instance
-        .collection('users')
+        .collection('players')
+        .doc(player!.uid)
+        .collection("customers")
         .doc(customer.id)
         .delete();
   }

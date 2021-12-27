@@ -7,7 +7,7 @@ import 'package:flutter/material.dart';
 import '../routing.dart';
 
 class AdminSignIn extends StatelessWidget {
-  static const String routesName="/adminsignin";
+  static const String routesName = "/adminsignin";
 
   @override
   Widget build(BuildContext context) {
@@ -55,15 +55,17 @@ class AdminSignIn extends StatelessWidget {
                   const SizedBox(height: 20),
                   // password
                   TextFormField(
-                      controller: model.passwordController,
-                      decoration: const InputDecoration(
-                        border: OutlineInputBorder(),
-                        labelText: 'パスワード',
-                        icon: Icon(Icons.vpn_key),
-                      ),
-                      onChanged: (text) {
-                        model.setPassword(text);
-                      }),
+                    controller: model.passwordController,
+                    decoration: const InputDecoration(
+                      border: OutlineInputBorder(),
+                      labelText: 'パスワード',
+                      icon: Icon(Icons.vpn_key),
+                    ),
+                    onChanged: (text) {
+                      model.setPassword(text);
+                    },
+                    obscureText: true,
+                  ),
                   const SizedBox(height: 20),
                   ElevatedButton(
                     style: ElevatedButton.styleFrom(primary: Colors.pink[200]),

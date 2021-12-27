@@ -57,15 +57,17 @@ class PlayerSignUp extends StatelessWidget {
                       const SizedBox(height: 20),
                       // passwordフォーム
                       TextFormField(
-                          controller: model.passwordController,
-                          decoration: const InputDecoration(
-                            border: OutlineInputBorder(),
-                            labelText: 'パスワード',
-                            icon: Icon(Icons.vpn_key),
-                          ),
-                          onChanged: (text) {
-                            model.setPassword(text);
-                          }),
+                        controller: model.passwordController,
+                        decoration: const InputDecoration(
+                          border: OutlineInputBorder(),
+                          labelText: 'パスワード',
+                          icon: Icon(Icons.vpn_key),
+                        ),
+                        onChanged: (text) {
+                          model.setPassword(text);
+                        },
+                        obscureText: true,
+                      ),
                       const SizedBox(height: 20),
                       ElevatedButton(
                         style:

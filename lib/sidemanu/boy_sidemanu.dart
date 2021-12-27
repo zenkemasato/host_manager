@@ -53,7 +53,7 @@ class BoySideMenu extends StatelessWidget {
               leading: const Icon(Icons.note_alt_outlined),
               onTap: () {
                 Navigator.of(context).pop();
-                Navigator.of(context).pushReplacementNamed(Routes.boyadverd);
+                Navigator.of(context).pushReplacementNamed(Routes.adverdpage);
               },
             ),
             // NGワード管理
@@ -62,7 +62,7 @@ class BoySideMenu extends StatelessWidget {
               leading: const Icon(Icons.cancel_outlined),
               onTap: () {
                 Navigator.of(context).pop();
-                Navigator.of(context).pushReplacementNamed(Routes.boyngword);
+                Navigator.of(context).pushReplacementNamed(Routes.ngwordpage);
               },
             ),
             // オーダー

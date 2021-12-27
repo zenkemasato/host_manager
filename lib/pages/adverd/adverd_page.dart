@@ -1,17 +1,16 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:host_manager/sidemanu/player_sidemanu.dart';
 
-class PlayerUser extends StatefulWidget {
-  static const String routesName = "/playeruser";
+class AdverdPage extends StatefulWidget {
+  static const String routesName = "/adverdpage";
 
-  const PlayerUser({Key? key}) : super(key: key);
+  const AdverdPage({Key? key}) : super(key: key);
 
   @override
-  _PlayerUserState createState() => _PlayerUserState();
+  _AdverdPageState createState() => _AdverdPageState();
 }
 
-class _PlayerUserState extends State<PlayerUser> {
+class _AdverdPageState extends State<AdverdPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -22,7 +21,7 @@ class _PlayerUserState extends State<PlayerUser> {
             child: SizedBox(
               height: 100,
               child: Text(
-                "Playerユーザー",
+                "NGワード",
                 style: TextStyle(
                     fontSize: 30,
                     color: Colors.white,
@@ -31,7 +30,6 @@ class _PlayerUserState extends State<PlayerUser> {
             ),
           ),
         ),
-        drawer: const PlayerSideMenu(),
-        body: Container());
+        body: const Center(child: Text("NGワード")));
   }
 }

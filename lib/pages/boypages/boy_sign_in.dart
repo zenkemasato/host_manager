@@ -1,4 +1,4 @@
-// ignore_for_file: use_key_in_widget_constructors
+// ignore_for_file: use_key_in_widget_constructors, avoid_unnecessary_containers
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -55,15 +55,17 @@ class BoySignIn extends StatelessWidget {
                   const SizedBox(height: 20),
                   // password
                   TextFormField(
-                      controller: model.passwordController,
-                      decoration: const InputDecoration(
-                        border: OutlineInputBorder(),
-                        labelText: 'パスワード',
-                        icon: Icon(Icons.vpn_key),
-                      ),
-                      onChanged: (text) {
-                        model.setPassword(text);
-                      }),
+                    controller: model.passwordController,
+                    decoration: const InputDecoration(
+                      border: OutlineInputBorder(),
+                      labelText: 'パスワード',
+                      icon: Icon(Icons.vpn_key),
+                    ),
+                    onChanged: (text) {
+                      model.setPassword(text);
+                    },
+                    obscureText: true,
+                  ),
                   const SizedBox(height: 20),
                   ElevatedButton(
                     style: ElevatedButton.styleFrom(primary: Colors.pink[200]),
@@ -72,7 +74,7 @@ class BoySignIn extends StatelessWidget {
                         await model.boySignInModel();
 
                         Navigator.of(context)
-                            .pushReplacementNamed(Routes.boyadverd);
+                            .pushReplacementNamed(Routes.adverdpage);
                       } catch (e) {
                         final snackBar = SnackBar(
                           backgroundColor: Colors.red,

@@ -23,7 +23,6 @@ class PlayerSideMenu extends StatelessWidget {
                     // ユーザーページ
                     GestureDetector(
                       onTap: () {
-                        Navigator.of(context).pop();
                         Navigator.of(context)
                             .pushReplacementNamed(Routes.playeruser);
                       },
@@ -35,7 +34,7 @@ class PlayerSideMenu extends StatelessWidget {
                             borderRadius: BorderRadius.circular(50),
                             color: Colors.grey.withOpacity(0.5),
                             image: const DecorationImage(
-                                image: AssetImage("images/usericon.png"),
+                                image: AssetImage("images/playericon.png"),
                                 fit: BoxFit.cover)),
                       ),
                     ),
@@ -63,7 +62,7 @@ class PlayerSideMenu extends StatelessWidget {
               leading: const Icon(Icons.note_alt_outlined),
               onTap: () {
                 Navigator.of(context).pop();
-                Navigator.of(context).pushReplacementNamed(Routes.playeradverd);
+                Navigator.of(context).pushReplacementNamed(Routes.adverdpage);
               },
             ),
             // NGワード管理
@@ -72,7 +71,7 @@ class PlayerSideMenu extends StatelessWidget {
               leading: const Icon(Icons.cancel_outlined),
               onTap: () {
                 Navigator.of(context).pop();
-                Navigator.of(context).pushReplacementNamed(Routes.playerngword);
+                Navigator.of(context).pushReplacementNamed(Routes.ngwordpage);
               },
             ),
             // オーダー

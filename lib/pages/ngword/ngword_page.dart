@@ -1,17 +1,16 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:host_manager/sidemanu/player_sidemanu.dart';
 
-class PlayerNgword extends StatefulWidget {
-  static const String routesName = "/playerngword";
+class NgwordPage extends StatefulWidget {
+  static const String routesName = "/ngwordpage";
 
-  const PlayerNgword({Key? key}) : super(key: key);
+  const NgwordPage({Key? key}) : super(key: key);
 
   @override
-  _PlayerNgwordState createState() => _PlayerNgwordState();
+  _NgwordPageState createState() => _NgwordPageState();
 }
 
-class _PlayerNgwordState extends State<PlayerNgword> {
+class _NgwordPageState extends State<NgwordPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -31,7 +30,6 @@ class _PlayerNgwordState extends State<PlayerNgword> {
             ),
           ),
         ),
-        drawer: const PlayerSideMenu(),
         body: const Center(child: Text("NGワード")));
   }
 }

@@ -4,8 +4,6 @@ import 'package:host_manager/domein/costomer.dart';
 import 'package:host_manager/pages/playerpages/customer/addcustomer/add_customer.dart';
 import 'package:host_manager/pages/playerpages/customer/editcustomer/edit_customer.dart';
 import 'package:host_manager/pages/playerpages/customer/player_customer_model.dart';
-import 'package:host_manager/pages/playerpages/player_sign_in.dart';
-import 'package:host_manager/pages/playerpages/player_sign_up.dart';
 import 'package:host_manager/sidemanu/player_sidemanu.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter/cupertino.dart';

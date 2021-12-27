@@ -1,4 +1,4 @@
-// ignore_for_file: use_key_in_widget_constructors
+// ignore_for_file: use_key_in_widget_constructors, avoid_unnecessary_containers
 import 'package:host_manager/pages/playerpages/player_sign_in_model.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter/cupertino.dart';
@@ -55,15 +55,17 @@ class PlayerSignIn extends StatelessWidget {
                   const SizedBox(height: 20),
                   // password
                   TextFormField(
-                      controller: model.passwordController,
-                      decoration: const InputDecoration(
-                        border: OutlineInputBorder(),
-                        labelText: 'パスワード',
-                        icon: Icon(Icons.vpn_key),
-                      ),
-                      onChanged: (text) {
-                        model.setPassword(text);
-                      }),
+                    controller: model.passwordController,
+                    decoration: const InputDecoration(
+                      border: OutlineInputBorder(),
+                      labelText: 'パスワード',
+                      icon: Icon(Icons.vpn_key),
+                    ),
+                    onChanged: (text) {
+                      model.setPassword(text);
+                    },
+                    obscureText: true,
+                  ),
                   const SizedBox(height: 20),
                   ElevatedButton(
                     style: ElevatedButton.styleFrom(primary: Colors.pink[200]),

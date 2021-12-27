@@ -63,13 +63,13 @@ class AdminSideManu extends StatelessWidget {
               leading: const Icon(Icons.note_alt_outlined),
               onTap: () {
                 Navigator.of(context).pop();
-                Navigator.of(context).pushReplacementNamed(Routes.adminadvers);
+                Navigator.of(context).pushReplacementNamed(Routes.adverdpage);
               },
             ),
             // Stuff管理
             ListTile(
               title: const Text("Stuff管理"),
-              leading: const Icon(Icons.trending_up_outlined),
+              leading: const Icon(Icons.settings_accessibility_outlined),
               onTap: () {
                 Navigator.of(context).pop();
                 Navigator.of(context).pushReplacementNamed(Routes.adminstuff);
@@ -87,7 +87,7 @@ class AdminSideManu extends StatelessWidget {
             // 売上管理
             ListTile(
               title: const Text("売上管理"),
-              leading: const Icon(Icons.settings_accessibility),
+              leading: const Icon(Icons.trending_up_outlined),
               onTap: () {
                 Navigator.of(context).pop();
                 Navigator.of(context).pushReplacementNamed(Routes.adminsales);
@@ -108,7 +108,7 @@ class AdminSideManu extends StatelessWidget {
               leading: const Icon(Icons.cancel_outlined),
               onTap: () {
                 Navigator.of(context).pop();
-                Navigator.of(context).pushReplacementNamed(Routes.adminngword);
+                Navigator.of(context).pushReplacementNamed(Routes.ngwordpage);
               },
             ),
             // オーダー

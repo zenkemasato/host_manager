@@ -1,7 +1,11 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
 class AddCustomerModel extends ChangeNotifier {
+  // firebaseAuthからそれぞれのデータをとる
+  final player = FirebaseAuth.instance.currentUser;
+
   String? name;
   String? age;
   String? birthday;
@@ -35,7 +39,11 @@ class AddCustomerModel extends ChangeNotifier {
     }
 
     // firestoreに追加
-    await FirebaseFirestore.instance.collection('users').add({
+    await FirebaseFirestore.instance
+        .collection('players')
+        .doc(player!.uid)
+        .collection("customers")
+        .add({
       "name": name,
       "age": age,
       "birthday": birthday,
