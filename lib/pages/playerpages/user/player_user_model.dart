@@ -1,9 +1,10 @@
 // ignore_for_file: unused_local_variable
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
 class PlayerUserModel extends ChangeNotifier {
+  String? name;
+  String? age;
   String? email;
   bool isLoading = false;
 
@@ -17,9 +18,10 @@ class PlayerUserModel extends ChangeNotifier {
     notifyListeners();
   }
 
-  void fetcUser() {
+  Future<void> fetcUser() async {
     final user = FirebaseAuth.instance.currentUser;
     this.email = user!.email;
+
     notifyListeners();
   }
 

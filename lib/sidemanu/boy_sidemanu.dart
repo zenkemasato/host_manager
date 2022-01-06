@@ -53,7 +53,7 @@ class BoySideMenu extends StatelessWidget {
               leading: const Icon(Icons.note_alt_outlined),
               onTap: () {
                 Navigator.of(context).pop();
-                Navigator.of(context).pushReplacementNamed(Routes.adverdpage);
+                Navigator.of(context).pushReplacementNamed(Routes.boyadverd);
               },
             ),
             // NGワード管理

@@ -3,9 +3,13 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
 class PlayerSignUpModel extends ChangeNotifier {
+  final nameController = TextEditingController();
+  final ageController = TextEditingController();
   final emailController = TextEditingController();
   final passwordController = TextEditingController();
 
+  String? name;
+  String? age;
   String? email;
   String? password;
 
@@ -32,6 +36,8 @@ class PlayerSignUpModel extends ChangeNotifier {
   }
 
   Future playerSignUpModel() async {
+    this.name = nameController.text;
+    this.age = ageController.text;
     this.email = emailController.text;
     this.password = passwordController.text;
 
@@ -42,12 +48,14 @@ class PlayerSignUpModel extends ChangeNotifier {
       final user = userCredential.user;
       if (user != null) {
         final uid = user.uid;
-        // firestoreに追加
 
+        // firestoreに追加
         final doc = FirebaseFirestore.instance.collection('players').doc(uid);
 
         await doc.set({
           "uid": uid,
+          "name": name,
+          "age": age,
           "email": email,
         });
       }

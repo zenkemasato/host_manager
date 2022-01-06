@@ -3,9 +3,14 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 
 class BoySignUpModel extends ChangeNotifier {
+  // テキストコントローラー
+  final nameController = TextEditingController();
+  final ageController = TextEditingController();
   final emailController = TextEditingController();
   final passwordController = TextEditingController();
-
+  // 代入する変数
+  String? name;
+  String? age;
   String? email;
   String? password;
 
@@ -32,6 +37,8 @@ class BoySignUpModel extends ChangeNotifier {
   }
 
   Future boySignUpModel() async {
+    this.name = nameController.text;
+    this.age = ageController.text;
     this.email = emailController.text;
     this.password = passwordController.text;
 
@@ -47,6 +54,8 @@ class BoySignUpModel extends ChangeNotifier {
         final doc = FirebaseFirestore.instance.collection('boys').doc(uid);
 
         await doc.set({
+          "name": name,
+          "age": age,
           "uid": uid,
           "email": email,
         });

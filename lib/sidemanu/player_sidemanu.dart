@@ -56,13 +56,23 @@ class PlayerSideMenu extends StatelessWidget {
                     .pushReplacementNamed(Routes.playercustomer);
               },
             ),
+            // 顧客見込み
+            ListTile(
+              title: const Text("顧客見込み"),
+              leading: const Icon(Icons.person_search),
+              onTap: () {
+                Navigator.of(context).pop();
+                Navigator.of(context)
+                    .pushReplacementNamed(Routes.playernextcustomer);
+              },
+            ),
             // 出勤管理
             ListTile(
               title: const Text("出勤管理"),
               leading: const Icon(Icons.note_alt_outlined),
               onTap: () {
                 Navigator.of(context).pop();
-                Navigator.of(context).pushReplacementNamed(Routes.adverdpage);
+                Navigator.of(context).pushReplacementNamed(Routes.playeradverd);
               },
             ),
             // NGワード管理

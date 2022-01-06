@@ -57,24 +57,34 @@ class AdminSideManu extends StatelessWidget {
                     .pushReplacementNamed(Routes.admincustomer);
               },
             ),
+            // 新規顧客
+            ListTile(
+              title: const Text("新規顧客"),
+              leading: const Icon(Icons.person_search),
+              onTap: () {
+                Navigator.of(context).pop();
+                Navigator.of(context)
+                    .pushReplacementNamed(Routes.adminnewcustomer);
+              },
+            ),
             // 出勤管理
             ListTile(
               title: const Text("出勤管理"),
               leading: const Icon(Icons.note_alt_outlined),
               onTap: () {
                 Navigator.of(context).pop();
-                Navigator.of(context).pushReplacementNamed(Routes.adverdpage);
+                Navigator.of(context).pushReplacementNamed(Routes.adminadverd);
               },
             ),
             // Stuff管理
-            ListTile(
-              title: const Text("Stuff管理"),
-              leading: const Icon(Icons.settings_accessibility_outlined),
-              onTap: () {
-                Navigator.of(context).pop();
-                Navigator.of(context).pushReplacementNamed(Routes.adminstuff);
-              },
-            ),
+            // ListTile(
+            //   title: const Text("Stuff管理"),
+            //   leading: const Icon(Icons.settings_accessibility_outlined),
+            //   onTap: () {
+            //     Navigator.of(context).pop();
+            //     Navigator.of(context).pushReplacementNamed(Routes.adminstuff);
+            //   },
+            // ),
             // 給与管理
             ListTile(
               title: const Text("給与管理"),

@@ -43,6 +43,30 @@ class PlayerSignUp extends StatelessWidget {
                   // 更新フォーム
                   child: Column(
                     children: [
+                      // 名前フォーム
+                      TextFormField(
+                          controller: model.nameController,
+                          decoration: const InputDecoration(
+                            border: OutlineInputBorder(),
+                            labelText: 'Player名',
+                            icon: Icon(Icons.markunread_outlined),
+                          ),
+                          onChanged: (text) {
+                            model.setEmail(text);
+                          }),
+                      const SizedBox(height: 20),
+                      // 年齢フォーム
+                      TextFormField(
+                          controller: model.ageController,
+                          decoration: const InputDecoration(
+                            border: OutlineInputBorder(),
+                            labelText: '年齢',
+                            icon: Icon(Icons.markunread_outlined),
+                          ),
+                          onChanged: (text) {
+                            model.setEmail(text);
+                          }),
+                      const SizedBox(height: 20),
                       // emailフォーム
                       TextFormField(
                           controller: model.emailController,

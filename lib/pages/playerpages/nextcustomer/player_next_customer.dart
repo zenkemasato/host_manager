@@ -1,28 +1,29 @@
-// ignore_for_file: non_constant_identifier_names, avoid_types_as_parameter_names,
-import 'package:flutter_slidable/flutter_slidable.dart';
-import 'package:host_manager/domein/costomer.dart';
-import 'package:host_manager/pages/playerpages/customer/addcustomer/add_customer.dart';
-import 'package:host_manager/pages/playerpages/customer/editcustomer/edit_customer.dart';
-import 'package:host_manager/pages/playerpages/customer/player_customer_model.dart';
-import 'package:host_manager/sidemanu/player_sidemanu.dart';
-import 'package:provider/provider.dart';
+// ignore_for_file: non_constant_identifier_names, avoid_types_as_parameter_names
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_slidable/flutter_slidable.dart';
+import 'package:host_manager/domein/next_customer.dart';
+import 'package:host_manager/sidemanu/player_sidemanu.dart';
+import 'package:provider/provider.dart';
 
-class PlayerCustomer extends StatefulWidget {
-  static const String routesName = "/playercustomer";
+import 'addnextcustomer/add_next_customer.dart';
+import 'player_next_customer_model.dart';
 
-  const PlayerCustomer({Key? key}) : super(key: key);
+class PlayerNextCustomer extends StatefulWidget {
+  static const String routesName = "/playernextcustomer";
+
+  const PlayerNextCustomer({Key? key}) : super(key: key);
 
   @override
-  _PlayerCustomerState createState() => _PlayerCustomerState();
+  _PlayerNextCustomerState createState() => _PlayerNextCustomerState();
 }
 
-class _PlayerCustomerState extends State<PlayerCustomer> {
+class _PlayerNextCustomerState extends State<PlayerNextCustomer> {
   @override
   Widget build(BuildContext context) {
-    return ChangeNotifierProvider<PlayerCustomerModel>(
-        create: (_) => PlayerCustomerModel()..fechCustomerList(),
+    return ChangeNotifierProvider<PlayerNextCustomerModel>(
+        create: (_) => PlayerNextCustomerModel()..fechCustomerList(),
         child: Scaffold(
             // アプリのヘッダー
             appBar: AppBar(
@@ -32,7 +33,7 @@ class _PlayerCustomerState extends State<PlayerCustomer> {
                 child: SizedBox(
                   height: 100,
                   child: Text(
-                    "顧客一覧",
+                    "顧客見込",
                     style: TextStyle(
                         fontSize: 30,
                         color: Colors.white,
@@ -43,15 +44,14 @@ class _PlayerCustomerState extends State<PlayerCustomer> {
             ),
             drawer: const PlayerSideMenu(),
             // メイン画面
-            body:
-                Consumer<PlayerCustomerModel>(builder: (context, model, child) {
-              final List<Customer>? Customers = model.Customers;
-
-              if (Customers == null) {
+            body: Consumer<PlayerNextCustomerModel>(
+                builder: (context, model, child) {
+              final List<NextCustomer>? NextCustomers = model.NextCustomers;
+              if (NextCustomers == null) {
                 return const Center(child: CircularProgressIndicator());
               }
 
-              final List<Widget> widgets = Customers.map((Customer) =>
+              final List<Widget> widgets = NextCustomers.map((NextCustomer) =>
                   // スライダーメニュー
                   Slidable(
                     endActionPane: ActionPane(
@@ -63,7 +63,7 @@ class _PlayerCustomerState extends State<PlayerCustomer> {
                           icon: Icons.delete,
                           label: '削除',
                           onPressed: (context) =>
-                              coutionDialog(context, Customer, model),
+                              coutionDialog(context, NextCustomer, model),
                         ),
                       ],
                     ),
@@ -71,16 +71,16 @@ class _PlayerCustomerState extends State<PlayerCustomer> {
                     child: Container(
                       margin: const EdgeInsets.all(20),
                       child: ListTile(
-                        title: Text(Customer.name + "様"),
+                        title: Text(NextCustomer.name + "様"),
                         subtitle: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            Text(Customer.age + "歳"),
-                            Text("誕生日 : " + Customer.birthday),
-                            Text("趣味 : " + Customer.hobby),
-                            Text(Customer.count + "回来店"),
-                            Text("電話番号 : " + Customer.number),
-                            Text("NGワード : " + Customer.ngword),
+                            Text(NextCustomer.age + "歳"),
+                            Text("誕生日 : " + NextCustomer.birthday),
+                            Text("趣味 : " + NextCustomer.hobby),
+                            Text(NextCustomer.count + "回来店"),
+                            Text("電話番号 : " + NextCustomer.number),
+                            Text("NGワード : " + NextCustomer.ngword),
                           ],
                         ),
                         trailing: Column(children: [
@@ -88,7 +88,7 @@ class _PlayerCustomerState extends State<PlayerCustomer> {
                           GestureDetector(
                             onTap: () {
                               // shareしたものをNGワードモデルに格納
-                              model.shareCustomerModel(Customer);
+                              model.shareCustomerModel(NextCustomer);
                               var snackBar = const SnackBar(
                                 backgroundColor: Colors.red,
                                 content: Text(
@@ -113,32 +113,24 @@ class _PlayerCustomerState extends State<PlayerCustomer> {
                               ),
                             ),
                           ),
-                          //editボタン
+                          // pushボタン
                           GestureDetector(
-                            onTap: () async {
-                              // 画面遷移
-                              final String? name = await Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                  builder: (context) => EditCustomer(Customer),
+                            onTap: () {
+                              // pushしたものをNextCustomerに格納
+                              model.addCustomer(NextCustomer);
+                              var snackBar = const SnackBar(
+                                backgroundColor: Colors.red,
+                                content: Text(
+                                  'まりちゃんの顧客に追加しました',
+                                  style: TextStyle(
+                                      color: Colors.white,
+                                      fontSize: 20,
+                                      fontWeight: FontWeight.bold),
                                 ),
                               );
-
-                              if (name != null) {
-                                final snackBar = SnackBar(
-                                  backgroundColor: const Color(0xFFF48FB1),
-                                  content: Text(
-                                    '$name様を更新しました',
-                                    style: const TextStyle(
-                                        color: Colors.white,
-                                        fontSize: 20,
-                                        fontWeight: FontWeight.bold),
-                                  ),
-                                );
-                                ScaffoldMessenger.of(context)
-                                    .showSnackBar(snackBar);
-                              }
-                              model.fechCustomerList();
+                              ScaffoldMessenger.of(context)
+                                  .showSnackBar(snackBar);
+                              model.deleteCustomer(NextCustomer);
                             },
                             child: Container(
                               padding: const EdgeInsets.all(2),
@@ -146,12 +138,11 @@ class _PlayerCustomerState extends State<PlayerCustomer> {
                                   borderRadius: BorderRadius.circular(50),
                                   color: Colors.blue),
                               child: const Icon(
-                                Icons.edit,
+                                Icons.reply_outlined,
                                 color: Colors.white,
                               ),
                             ),
                           ),
-                          // deleteボタン
                         ]),
                       ),
                     ),
@@ -162,15 +153,15 @@ class _PlayerCustomerState extends State<PlayerCustomer> {
             }),
 
             // 追加ボタン
-            floatingActionButton:
-                Consumer<PlayerCustomerModel>(builder: (context, model, child) {
+            floatingActionButton: Consumer<PlayerNextCustomerModel>(
+                builder: (context, model, child) {
               return FloatingActionButton(
                 onPressed: () async {
                   // 画面遷移
                   final bool? added = await Navigator.push(
                     context,
                     MaterialPageRoute(
-                      builder: (context) => const AddCustomer(),
+                      builder: (context) => const AddNextCustomer(),
                       fullscreenDialog: true,
                     ),
                   );
@@ -179,7 +170,7 @@ class _PlayerCustomerState extends State<PlayerCustomer> {
                     const snackBar = SnackBar(
                       backgroundColor: Color(0xFFF48FB1),
                       content: Text(
-                        '顧客情報を追加しました',
+                        '新規顧客を追加しました',
                         style: TextStyle(
                             color: Colors.white,
                             fontSize: 20,
@@ -200,8 +191,8 @@ class _PlayerCustomerState extends State<PlayerCustomer> {
   // 削除するためのダイアログ
   void coutionDialog(
     BuildContext context,
-    Customer customer,
-    PlayerCustomerModel model,
+    NextCustomer customer,
+    PlayerNextCustomerModel model,
   ) {
     showDialog(
         context: context,
@@ -217,13 +208,12 @@ class _PlayerCustomerState extends State<PlayerCustomer> {
                       child: const Text('いいえ'),
                       isDestructiveAction: true,
                       onPressed: () {
-                        Navigator.of(context).pop();
+                        Navigator.pop(context);
                       }),
                   CupertinoDialogAction(
                       child: const Text('はい'),
                       onPressed: () async {
                         await model.deleteCustomer(customer);
-
                         final snackBar = SnackBar(
                           backgroundColor: Colors.red,
                           content: Text(

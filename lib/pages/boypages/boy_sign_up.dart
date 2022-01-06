@@ -79,7 +79,7 @@ class BoySignUp extends StatelessWidget {
                             await model.boySignUpModel();
 
                             Navigator.of(context)
-                                .pushReplacementNamed(Routes.adverdpage);
+                                .pushReplacementNamed(Routes.boyadverd);
                           } catch (e) {
                             final snackBar = SnackBar(
                               backgroundColor: Colors.red,
